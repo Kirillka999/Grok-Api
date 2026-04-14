@@ -70,5 +70,25 @@
       "7f68d30c4722667a630e7189e05f1b6f804469541c",
       "7f5039e499ebb82b694cd474f2c52a8f8ed8aa5fb4"
     ]
+  },
+  {
+    "xsid_script": "static/chunks/8789db25b41dd5df.js",
+    "action_script": "/_next/static/chunks/132c1a60f7bc53de.js",
+    "actions": [
+      "7fdedb85987f96ce511dec576322d6f1c41dadc666",
+      "7f890ac365a349c7cece095c8199d8054cf591228a",
+      "7fb9395b097c04add95e797bcd86374efacd8da4a9",
+      "7f95b6a04ea41005bff5b1b61fd1200908891fa02d"
+    ]
+  },
+  {
+    "xsid_script": "static/chunks/843f6d6a3c097886.js",
+    "action_script": "https://cdn.grok.com/_next/static/chunks/8cd0422c5ef86a57.js",
+    "actions": [
+      "7f1c7234a23a76bf5660bfdcca7c04b0481bb3c610",
+      "7fb8764322cafbbfd2ff6fc26c0fda5c9e5d874292",
+      "7f135d62bad2571869ee5f0d225cb79c563ca5f584",
+      "7f1e6362551b2af5179dab018073b43664269c4d49"
+    ]
   }
 ]

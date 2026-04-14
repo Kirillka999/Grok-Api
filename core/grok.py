@@ -44,7 +44,7 @@ class Grok:
             load_site: requests.models.Response = self.session.get('https://grok.com/c')
             self.session.cookies.update(load_site.cookies)
             
-            scripts: list = [s['src'] for s in BeautifulSoup(load_site.text, 'html.parser').find_all('script', src=True) if s['src'].startswith('/_next/static/chunks/')]
+            scripts: list = [s['src'] for s in BeautifulSoup(load_site.text, 'html.parser').find_all('script', src=True) if '/_next/static/chunks/' in s['src']]
 
             self.actions, self.xsid_script = Parser.parse_grok(scripts)
             

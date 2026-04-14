@@ -83,7 +83,8 @@ class Parser:
                 return index["actions"], index["xsid_script"]
             
         for script in scripts:
-            content: str = requests.get(f'https://grok.com{script}', impersonate="chrome136").text
+            url: str = script if script.startswith('http') else f'https://grok.com{script}'
+            content: str = requests.get(url, impersonate="chrome136").text
             if "anonPrivateKey" in content:
                 script_content1: str = content
                 action_script: str = script
