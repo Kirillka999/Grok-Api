@@ -1,4 +1,6 @@
-from fastapi      import FastAPI, HTTPException
+import os
+from fastapi      import FastAPI, HTTPException, Security, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from urllib.parse import urlparse, ParseResult
 from pydantic     import BaseModel
 from core         import Grok
@@ -6,6 +8,17 @@ from uvicorn      import run
 
 
 app = FastAPI()
+security = HTTPBearer()
+
+def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(security)):
+    expected_api_key = os.getenv("PROXY_API_KEY")
+    if expected_api_key and credentials.credentials != expected_api_key:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid API Key",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return credentials.credentials
 
 class ConversationRequest(BaseModel):
     proxy: str | None = None
@@ -37,7 +50,7 @@ def format_proxy(proxy: str) -> str:
         raise HTTPException(status_code=400, detail=f"Invalid proxy format: {str(e)}")
 
 @app.post("/ask")
-async def create_conversation(request: ConversationRequest):
+async def create_conversation(request: ConversationRequest, api_key: str = Depends(verify_api_key)):
     if not request.message:
         raise HTTPException(status_code=400, detail="Message is required")
     
