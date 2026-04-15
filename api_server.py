@@ -1,6 +1,7 @@
 import os
 from fastapi      import FastAPI, HTTPException, Security, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi.middleware.cors import CORSMiddleware
 from urllib.parse import urlparse, ParseResult
 from pydantic     import BaseModel
 from core         import Grok
@@ -8,6 +9,15 @@ from uvicorn      import run
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 security = HTTPBearer()
 
 def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(security)):
